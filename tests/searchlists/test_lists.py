@@ -1,5 +1,7 @@
+import pyperclip
 import pytest
-from searchlists.lists import create_string
+
+from searchlists.lists import copy, create_string
 
 TEST_LIST = [7, 809823, 102890, "string", 291]
 
@@ -42,12 +44,31 @@ def test_quote():
 
 def test_validate():
 
-    inputs = [
+    kwargs = [
         {"items": "not a list"},
         {"items": TEST_LIST, "prefix": ["not", "a", "str"]},
         {"items": TEST_LIST, "suffix": ("not", "a", "str")},
         {"items": TEST_LIST, "sep": ("not", "a", "str")},
     ]
-    for input in inputs:
+    for k in kwargs:
         with pytest.raises(TypeError):
-            create_string(**input)
+            create_string(**k)
+
+
+def test_copy():
+    kwargs = [
+        {"items": TEST_LIST},
+        {"items": TEST_LIST, "quote": True},
+        {"items": TEST_LIST, "prefix": "pre-"},
+        {"items": TEST_LIST, "prefix": "pre-", "quote": True},
+        {"items": TEST_LIST, "suffix": "-post"},
+        {"items": TEST_LIST, "prefix": "pre-", "suffix": "-post"},
+    ]
+
+    for k in kwargs:
+        copy(**k)  # copy items to clipboard
+        string = create_string(**k)
+        assert (
+            string == pyperclip.paste(),
+            "clipboard did not have expected value",
+        )
