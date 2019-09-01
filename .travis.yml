@@ -14,5 +14,6 @@ before_install:
   - sudo apt-get install xclip
   - sudo apt-get install xsel
   - sudo apt-get install python-pyperclip
+  - sudo apt-get install python3-pyperclip
 
 script: pytest
