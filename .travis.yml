@@ -5,7 +5,7 @@ python:
 # setup installation
 install:
   - pip install -r requirements_dev.txt
-  - pip install gtk
+  - pip install PyQt4
 
 before_install:
   # xclip is one of several options as a requirement for access to the
