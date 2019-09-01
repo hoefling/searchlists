@@ -6,10 +6,11 @@ python:
 install:
   - pip install -r requirements_dev.txt
 
-  # gtk is one of several options as a requirement for access to the copy/paste
-  # mechanisms for pyperclip.
+before_install:
+  # xclip is one of several options as a requirement for access to the
+  # copy/paste mechanisms for pyperclip.
   # reference pyperclip documentation for details.
   # https://pyperclip.readthedocs.io/en/latest/introduction.html#not-implemented-error
-  - pip install gtk
+  - sudo apt-get install xclip
 
 script: pytest
