@@ -5,6 +5,7 @@ python:
 # setup installation
 install:
   - pip install -r requirements_dev.txt
+  - pip install gtk
 
 before_install:
   # xclip is one of several options as a requirement for access to the
@@ -12,6 +13,6 @@ before_install:
   # reference pyperclip documentation for details.
   # https://pyperclip.readthedocs.io/en/latest/introduction.html#not-implemented-error
   - sudo apt-get install xclip
-  - sudo apt-get install python3-pyperclip
+#  - sudo apt-get install python3-pyperclip
 
 script: pytest
